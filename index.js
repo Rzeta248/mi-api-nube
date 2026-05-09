@@ -7,8 +7,9 @@ const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
   res.json({ 
-    mensaje: '¡Hola Google Cloud! Nuestra API está viva. 🚀',
-    estado: 'OK'
+    mensaje: '¡Magia pura! Este despliegue fue 100% automático desde GitHub. 🪄☁️',
+    estado: 'OK',
+    version: '3.0'
   });
 });
 
