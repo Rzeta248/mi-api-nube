@@ -1,0 +1,24 @@
+steps:
+# 1. Construir la imagen de Docker
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'southamerica-east1-docker.pkg.dev/aprendiendogcp-495517/mi-repo-docker/mi-api:$COMMIT_SHA', '.']
+
+# 2. Subir la imagen a tu baúl (Artifact Registry)
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'southamerica-east1-docker.pkg.dev/aprendiendogcp-495517/mi-repo-docker/mi-api:$COMMIT_SHA']
+
+# 3. Desplegar la nueva versión en Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+  - 'run'
+  - 'deploy'
+  - 'mi-api-servicio'
+  - '--image'
+  - 'southamerica-east1-docker.pkg.dev/aprendiendogcp-495517/mi-repo-docker/mi-api:$COMMIT_SHA'
+  - '--region'
+  - 'southamerica-east1'
+
+# ¡Aquí está la magia que soluciona el error rojo!
+options:
+  logging: CLOUD_LOGGING_ONLY
