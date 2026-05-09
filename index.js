@@ -9,7 +9,8 @@ app.get('/', (req, res) => {
   res.json({ 
     mensaje: '¡Magia pura! Este despliegue fue 100% automático desde GitHub. 🪄☁️',
     estado: 'OK',
-    version: '3.0'
+    version: '3.0',
+    new_mensaje: '¡Ahora con más magia y estabilidad! 🚀✨'
   });
 });
 
